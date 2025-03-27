@@ -1,0 +1,26 @@
+{
+  "name": "othello-danyo",
+  "version": "1.0.0",
+  "description": "Othello utility with min/max and reinforcement learning algorithms",
+  "keywords": [
+    "othello"
+  ],
+  "homepage": "https://github.com/dhong9/othello-danyo#readme",
+  "bugs": {
+    "url": "https://github.com/dhong9/othello-danyo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhong9/othello-danyo.git"
+  },
+  "license": "ISC",
+  "author": "Danyo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive --exit"
+  },
+  "devDependencies": {
+    "mocha": "^11.1.0"
+  }
+}
