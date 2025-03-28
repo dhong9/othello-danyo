@@ -61,6 +61,13 @@ describe("Game Utilities", () => {
         const othello = new Othello_Danyo();
         const board = othello.board;
         assert.ok(othello.checkFlip(board, 3, 3, 1, 0, 1, 2));
-        assert.ok(othello.checkFlip(!board, 2, 2, 1, 0, 1, 2));
+        assert.ok(!othello.checkFlip(board, 3, 1, 1, 0, 1, 2));
+    });
+
+    it("Validates moves", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        assert.ok(othello.validMove(board, 2, 3, 1));
+        assert.ok(!othello.validMove(board, 2, 2, 2));
     });
 })

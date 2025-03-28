@@ -50,6 +50,27 @@ class Othello_Danyo {
         }
           return false; // Either no consecutive opponent pieces or hit the edge
     }
+
+    validMove(board, r, c, piece) {
+        // Check that the coordinates are empty
+        if (!this.inBounds(r, c) || board[r][c]) return false;
+
+        // Figure out the character of the opponent's piece
+        const opponent = piece === 2 ? 1 : 2;
+
+        // If we can flip in any direction, it is valid
+        const directions = [
+            [-1, -1],
+            [-1, 0],
+            [-1, 1],
+            [1, -1],
+            [1, 0],
+            [1, 1],
+            [0, -1],
+            [0, 1]
+        ]
+        return directions.some(([deltaRow, deltaCol]) => this.checkFlip(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent));
+    }
 }
 
 module.exports = Othello_Danyo;
