@@ -83,6 +83,12 @@ class Othello_Danyo {
         
         return moves;
     }
+
+    gameOver(board) {
+        const moves1 = this.getValidMoves(board, 1),
+              moves2 = this.getValidMoves(board, 2);
+        return moves1.length < 1 && moves2.length < 1;
+    }
 }
 
 module.exports = Othello_Danyo;

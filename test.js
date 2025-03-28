@@ -80,5 +80,13 @@ describe("Game Utilities", () => {
         const expected2 = [[2, 4], [3, 5], [4, 2], [5, 3]];
         assert.deepEqual(validMoves1, expected1);
         assert.deepEqual(validMoves2, expected2);
-    })
+    });
+
+    it("Detects game over", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        assert.ok(!othello.gameOver(board));
+        const board2 = othello.board.map((row) => row.map(_ => 2));
+        assert.ok(othello.gameOver(board2));
+    });
 })
