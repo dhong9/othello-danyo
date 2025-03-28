@@ -71,6 +71,18 @@ class Othello_Danyo {
         ]
         return directions.some(([deltaRow, deltaCol]) => this.checkFlip(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent));
     }
+
+    getValidMoves(board, piece) {
+        const moves = [];
+
+        // Check each square of the board and if we can move there, remember the coords
+        for (let r = 0; r < 8; r++)
+            for (let c = 0; c < 8; c++)
+                if (this.validMove(board, r, c, piece))
+                    moves.push([r, c]);
+        
+        return moves;
+    }
 }
 
 module.exports = Othello_Danyo;

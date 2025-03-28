@@ -70,4 +70,15 @@ describe("Game Utilities", () => {
         assert.ok(othello.validMove(board, 2, 3, 1));
         assert.ok(!othello.validMove(board, 2, 2, 2));
     });
+
+    it("Gets valid moves", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        const validMoves1 = othello.getValidMoves(board, 1);
+        const validMoves2 = othello.getValidMoves(board, 2);
+        const expected1 = [[2, 3], [3, 2], [4, 5], [5, 4]];
+        const expected2 = [[2, 4], [3, 5], [4, 2], [5, 3]];
+        assert.deepEqual(validMoves1, expected1);
+        assert.deepEqual(validMoves2, expected2);
+    })
 })
