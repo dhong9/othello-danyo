@@ -89,6 +89,32 @@ class Othello_Danyo {
               moves2 = this.getValidMoves(board, 2);
         return moves1.length < 1 && moves2.length < 1;
     }
+
+    makeMove(board, r, c, piece) {
+        // Put the piece at x, y
+        board[r][c] = piece;
+
+        // Figure of the character of the opponent's piece
+        const opponent = piece === 2 ? 1 : 2;
+
+        // Check all 8 directions
+        const directions = [
+            [-1, -1],
+            [-1, 1],
+            [1, -1],
+            [1, 1],
+            [0, 1],
+            [0, -1],
+            [1, 0],
+            [0, -1]
+        ];
+        for (const [deltaRow, deltaCol] of directions) {
+            // If pieces can be flipped in that direction,
+            // then flip all valid pieces
+            if (this.checkFlip(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent))
+                this.flipPieces(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent);
+        }
+    }
 }
 
 module.exports = Othello_Danyo;
