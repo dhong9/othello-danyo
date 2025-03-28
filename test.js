@@ -13,7 +13,7 @@ describe("Game Initialization", () => {
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]
-        ]
+        ];
         assert.deepEqual(othello.board, expectedBoard);
     });
 });
@@ -26,5 +26,41 @@ describe("Game Utilities", () => {
         assert.ok(othello.inBounds(7, 7));
         assert.ok(!othello.inBounds(-1, -2));
         assert.ok(!othello.inBounds(9, 8));
+    });
+
+    it("Flips pieces", () => {
+        const othello = new Othello_Danyo();
+        const expectedBoard1 = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 2, 2, 0, 0, 0],
+            [0, 0, 0, 2, 2, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        const expectedBoard2 = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 2, 0, 0, 0],
+            [0, 0, 0, 2, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        const board = othello.board;
+        othello.flipPieces(board, 3, 4, 1, -1, 2, 1);
+        assert.deepEqual(board, expectedBoard1);
+        othello.flipPieces(board, 3, 3, 1, 1, 1, 2);
+        assert.deepEqual(board, expectedBoard2);
+    });
+
+    it("Checks if pieces can be flipped", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        assert.ok(othello.checkFlip(board, 3, 3, 1, 0, 1, 2));
+        assert.ok(othello.checkFlip(!board, 2, 2, 1, 0, 1, 2));
     });
 })

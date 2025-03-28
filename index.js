@@ -35,6 +35,20 @@ class Othello_Danyo {
             r += deltaRow;
             c += deltaCol;
         }
+        return board;
+    }
+
+    checkFlip(board, r, c, deltaRow, deltaCol, myPiece, opponentPiece) {
+        if (this.inBounds(r, c) && board[r][c] === opponentPiece) {
+            while (this.inBounds(r + deltaRow, c + deltaCol)) {
+                r += deltaRow;
+                c += deltaCol;
+                if (!board[r][c]) return false;// not consecutive
+                if (board[r][c] === myPiece) return true; // At least one piece we can flip
+              }
+              // It is an opponent piece, just keep scanning in our direction
+        }
+          return false; // Either no consecutive opponent pieces or hit the edge
     }
 }
 
