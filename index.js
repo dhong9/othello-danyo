@@ -137,6 +137,36 @@ class Othello_Danyo {
         const ourScore = this.score(board, whoseTurn), oppScore = this.score(board, opponent);
         return ourScore - oppScore;
     }
+
+    minimaxValue(board, originalTurn, currentTurn, searchPly) {
+        if (searchPly === 5 || this.gameOver(board)) // Change to desired ply lookahead
+            return this.heuristic(board, originalTurn);
+        
+        const opponent = currentTurn === 2 ? 1 : 2;
+
+        const moves = this.getValidMoves(board, currentTurn);
+        if (moves.length < 1) // if no moves skip to next player's turn
+            return this.minimaxValue(board, originalTurn, opponent, searchPly + 1);
+        
+        // Remember the best move
+        let bestMoveVal = originalTurn === currentTurn ? -1/0 : 1/0;
+        for (const [moveRow, moveCol] of moves) {
+            // Apply the move to a new board
+            const tempBoard = this.copyBoard(board);
+            this.makeMove(tempBoard, moveRow, moveCol, currentTurn);
+            // Recursive call
+            const val = this.minimaxValue(tempBoard, originalTurn, opponent, searchPly + 1);
+            // Remember best move
+            if (originalTurn === currentTurn) {
+                // Remember max if it's the originator's turn
+                if (val > bestMoveVal) bestMoveVal = val;
+            } else {
+                // Remember min if it's opponent turn
+                bestMoveVal = val;
+            }
+        }
+        return bestMoveVal;
+    }
 }
 
 module.exports = Othello_Danyo;
