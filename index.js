@@ -127,6 +127,10 @@ class Othello_Danyo {
                 total += piece === cell;
         return total;
     }
+
+    copyBoard(board) {
+        return board.map(row => [...row]);
+    }
 }
 
 module.exports = Othello_Danyo;

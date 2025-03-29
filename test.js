@@ -105,7 +105,7 @@ describe("Game Utilities", () => {
         const score1 = othello.score(board, 1), score2 = othello.score(board, 2);
         assert.equal(2, score1);
         assert.equal(2, score2);
-    })
+    });
 });
 
 describe("Gameplay", () => {
@@ -167,4 +167,23 @@ describe("Gameplay", () => {
         othello.makeMove(othello.board, 5, 2, 1);
         assert.deepEqual(othello.board, move3);
     })
-})
+});
+
+describe("Min/Max Utilities", () => {
+    it("copies board", () => {
+        const othello = new Othello_Danyo();
+        const bCopy = othello.copyBoard(othello.board);
+        othello.board[0][0] = 2; // Make sure that modifying original board doesn't affect copy
+        const expectedBoard = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 2, 1, 0, 0, 0],
+            [0, 0, 0, 1, 2, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        assert.deepEqual(bCopy, expectedBoard);
+    });
+});
