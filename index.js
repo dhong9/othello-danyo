@@ -131,6 +131,12 @@ class Othello_Danyo {
     copyBoard(board) {
         return board.map(row => [...row]);
     }
+
+    heuristic(board, whoseTurn) {
+        const opponent = whoseTurn === 2 ? 1 : 2;
+        const ourScore = this.score(board, whoseTurn), oppScore = this.score(board, opponent);
+        return ourScore - oppScore;
+    }
 }
 
 module.exports = Othello_Danyo;

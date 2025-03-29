@@ -186,4 +186,25 @@ describe("Min/Max Utilities", () => {
         ];
         assert.deepEqual(bCopy, expectedBoard);
     });
+
+    it("computes heuristic", () => {
+        const othello = new Othello_Danyo();
+        
+        // Initial state
+        const move0 = othello.board;
+        assert.equal(othello.heuristic(move0, 1), 0);
+        assert.equal(othello.heuristic(move0, 2), 0);
+
+        // Move 1
+        othello.makeMove(move0, 2, 3, 1);
+        const move1 = othello.board;
+        assert.equal(othello.heuristic(move1, 1), 3);
+        assert.equal(othello.heuristic(move1, 2), -3);
+
+        // Move 2
+        othello.makeMove(move1, 2, 4, 2);
+        const move2 = othello.board;
+        assert.equal(othello.heuristic(move2, 1), 0);
+        assert.equal(othello.heuristic(move2, 2), 0);
+    })
 });
