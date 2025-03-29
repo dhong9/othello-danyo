@@ -195,6 +195,17 @@ class Othello_Danyo {
 
         return [bestX, bestY]
     }
+
+    updateQValues(qTable, state, action, newState, reward, learningRate=0.1, discountFactor=0.9) {
+        const qValues = qTable[state] || {};
+        
+        if (!(action in qValues)) qValues[action] = 0;
+        
+        const maxFutureQ = Math.max(...Object.values(getQValues(newState) || {0: 0}));
+        
+        // Apply learning rule
+        qValues[action] += learningRate * (reward + discountFactor * maxFutureQ - qValues[action]);
+    }
 }
 
 module.exports = Othello_Danyo;
