@@ -89,6 +89,15 @@ describe("Game Utilities", () => {
         const board2 = othello.board.map((row) => row.map(_ => 2));
         assert.ok(othello.gameOver(board2));
     });
+
+    it("Converts board to a string", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        const fen1 = "8/8/8/3wb3/3bw3/8/8/8 b";
+        const fen2 = "8/8/8/3wb3/3bw3/8/8/8 w";
+        assert.equal(othello.fen(board, 1), fen1);
+        assert.equal(othello.fen(board, 2), fen2);
+    });
 });
 
 describe("Gameplay", () => {

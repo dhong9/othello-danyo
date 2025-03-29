@@ -115,6 +115,10 @@ class Othello_Danyo {
                 this.flipPieces(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent);
         }
     }
+
+    fen(board, curPlayer) {
+        return board.map(row => row.map(curr => " bw"[curr]).join('').replace(/ +/g, x => x.length)).join('/') + ' ' + (curPlayer === 2 ? 'w' : 'b');
+    }
 }
 
 module.exports = Othello_Danyo;
