@@ -167,6 +167,34 @@ class Othello_Danyo {
         }
         return bestMoveVal;
     }
+
+    minimaxDecision(board, whoseTurn) {
+        const opponent = whoseTurn === 2 ? 1 : 2;
+
+        const moves = this.getValidMoves(board, whoseTurn);
+
+        // If there are no moves, return -1
+        if (moves.length < 1) return [-1, -1];
+
+        let bestMoveVal = -1/0;
+        let bestX, bestY = moves[0];
+
+        // Try out every move
+        for (const [xMove, yMove] of moves) {
+            const tempBoard = this.copyBoard(board);
+            this.makeMove(tempBoard, xMove, yMove, whoseTurn);
+            // Recursive call, initial search ply = 1
+            const val = this.minimaxValue(tempBoard, whoseTurn, opponent, 1);
+            // Remember the best move
+            if (val > bestMoveVal) {
+                bestMoveVal = val;
+                bestX = xMove;
+                bestY = yMove;
+            }
+        }
+
+        return [bestX, bestY]
+    }
 }
 
 module.exports = Othello_Danyo;

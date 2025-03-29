@@ -224,5 +224,23 @@ describe("Min/Max Utilities", () => {
         othello.makeMove(move1, 2, 4, 2);
         const move2 = othello.board;
         assert.equal(othello.minimaxValue(move2, 2, 1, 4), -3);
-    })
+    });
+
+    it("Computes min/max decision", () => {
+        const othello = new Othello_Danyo();
+
+        // Initial state
+        const move0 = othello.board;
+        assert.deepEqual(othello.minimaxDecision(move0, 1), [4, 5]);
+
+        // Move 1
+        othello.makeMove(move0, 4, 5, 1);
+        const move1 = othello.board;
+        assert.deepEqual(othello.minimaxDecision(move1, 2), [5, 5]);
+
+        // Move 2
+        othello.makeMove(move1, 5, 5, 2);
+        const move2 = othello.board;
+        assert.deepEqual(othello.minimaxDecision(move2, 1), [2, 3]);
+    });
 });
