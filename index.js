@@ -119,6 +119,14 @@ class Othello_Danyo {
     fen(board, curPlayer) {
         return board.map(row => row.map(curr => " bw"[curr]).join('').replace(/ +/g, x => x.length)).join('/') + ' ' + (curPlayer === 2 ? 'w' : 'b');
     }
+
+    score(board, piece) {
+        let total = 0;
+        for (const row of board)
+            for (const cell of row)
+                total += piece === cell;
+        return total;
+    }
 }
 
 module.exports = Othello_Danyo;

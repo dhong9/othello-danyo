@@ -98,6 +98,14 @@ describe("Game Utilities", () => {
         assert.equal(othello.fen(board, 1), fen1);
         assert.equal(othello.fen(board, 2), fen2);
     });
+
+    it("Calculates score", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        const score1 = othello.score(board, 1), score2 = othello.score(board, 2);
+        assert.equal(2, score1);
+        assert.equal(2, score2);
+    })
 });
 
 describe("Gameplay", () => {
