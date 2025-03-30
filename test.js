@@ -244,3 +244,13 @@ describe("Min/Max Utilities", () => {
         assert.deepEqual(othello.minimaxDecision(move2, 1), [2, 3]);
     });
 });
+
+describe("Reinforcement Learning Utilities", () => {
+    it("Plays a game", () => {
+        const othello = new Othello_Danyo();
+        const board = othello.board;
+        const [whiteTable, blackTable] = othello.train(board, 2);
+        assert.ok(Object.values(whiteTable).length > 0);
+        assert.ok(Object.values(blackTable).length > 0);
+    });
+});

@@ -87,7 +87,7 @@ class Othello_Danyo {
     gameOver(board) {
         const moves1 = this.getValidMoves(board, 1),
               moves2 = this.getValidMoves(board, 2);
-        return moves1.length < 1 && moves2.length < 1;
+        return moves1.length < 1 || moves2.length < 1;
     }
 
     makeMove(board, r, c, piece) {
@@ -197,14 +197,50 @@ class Othello_Danyo {
     }
 
     updateQValues(qTable, state, action, newState, reward, learningRate=0.1, discountFactor=0.9) {
-        const qValues = qTable[state] || {};
+        if (!(state in qTable))
+            qTable[state] = {};
         
-        if (!(action in qValues)) qValues[action] = 0;
+        if (!(action in qTable[state])) qTable[state][action] = 0;
         
-        const maxFutureQ = Math.max(...Object.values(getQValues(newState) || {0: 0}));
+        const maxFutureQ = Math.max(...Object.values(qTable[newState] || {0: 0}));
         
         // Apply learning rule
-        qValues[action] += learningRate * (reward + discountFactor * maxFutureQ - qValues[action]);
+        qTable[state][action] += learningRate * (reward + discountFactor * maxFutureQ - qTable[state][action]);
+    }
+
+    train(board, rounds) {
+        const qTable_white = {}, qTable_black = {};
+        let curPlayer = 1;
+        for (let i = 0; i < rounds; i++) {
+            const prevBoard = this.copyBoard(board);
+            while (!this.gameOver(board)) {
+                // Get Q values
+                const prevState = this.fen(board, curPlayer);
+                const qValues = (curPlayer === 2 ? qTable_white[prevState] : qTable_black[prevState]) || {};
+                const moves = this.getValidMoves(board, curPlayer);
+                
+                // Exploration: Random move with probability epsilon
+                const epsilon = 0.1;
+                const randomIndex = Math.floor(Math.random() * moves.length);
+                const randomMove = moves[randomIndex];
+                const bestMove = moves.reduce((best, move) => (qValues[move] || 0) > (qValues[best] || 0) ? move : best);
+                const [selectedRow, selectedCol] = Math.random() < epsilon ? randomMove : bestMove;
+                this.makeMove(board, selectedRow, selectedCol, curPlayer);
+
+                // Calculate reward
+                const reward = this.heuristic(board, curPlayer);
+                const action = selectedRow * 8 + selectedCol;
+                const curState = this.fen(board, curPlayer);
+                this.updateQValues(curPlayer == 2 ? qTable_white : qTable_black, prevState, action, curState, reward);
+
+                // Update game
+                curPlayer = curPlayer === 2 ? 1 : 2;
+            }
+            board = this.copyBoard(prevBoard);
+            curPlayer = 1;
+        }
+
+        return [qTable_white, qTable_black];
     }
 }
 
