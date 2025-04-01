@@ -14,13 +14,10 @@
     "url": "git+https://github.com/dhong9/othello-danyo.git"
   },
   "license": "ISC",
-  "author": "Danyo",
+  "author": "Danyo <danielhong35@gmail.com> (https://danyo.tech)",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --exit"
-  },
-  "devDependencies": {
-    "mocha": "^11.1.0"
+    "test": "echo \"Error: no tests specified\" && exit 1"
   }
 }
