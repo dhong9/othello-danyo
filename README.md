@@ -68,3 +68,22 @@ console.log(`Best move for player 1: (${bestRow}, ${bestCol})`);
 const [qTableWhite, qTableBlack] = game.train(game.board, 1000);
 console.log("Training complete!");
 ```
+
+## Board Representation (FEN Notation)
+
+The game board is represented as a string in FEN notation, where:
+- `b` represents black pieces
+- `w` represents white pieces
+- Numbers represent consecutive empty spaces
+- `/` separates rows
+- The last character indicates the current player(`b` or `w`)
+
+Example:
+
+```
+"bbbbbbbb/bbbbbbbb/bbbbbbbb/bbbbbbbb/bbbbbbbb/bbbbbbbb/bbbbbbbb/wwwwwwww w"
+```
+
+## License
+
+This project is licensed under the MIT License.
