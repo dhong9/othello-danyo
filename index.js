@@ -123,7 +123,7 @@ class Othello_Danyo {
     /**
      * Gets coordinates that a piece can be played
      * @param {Array<Array<Number>>} board the game board
-     * @param {*} piece player's piece
+     * @param {Number} piece player's piece
      * @returns Array of legal coordinates
      */
     getValidMoves(board, piece) {
