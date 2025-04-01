@@ -24,3 +24,6 @@ jobs:
 
       - name: Create .npmrc file
         run: echo "registry=https://registry.npmjs.org/" > ~/.npmrc
+
+      - name: Publish to NPM
+        run: npm publish
