@@ -166,14 +166,14 @@ class Othello_Danyo {
         // Check all 8 directions
         const directions = [
             [-1, -1],
+            [-1, 0],
             [-1, 1],
             [1, -1],
-            [1, 1],
-            [0, 1],
-            [0, -1],
             [1, 0],
-            [0, -1]
-        ];
+            [1, 1],
+            [0, -1],
+            [0, 1]
+        ]
         for (const [deltaRow, deltaCol] of directions) {
             // If pieces can be flipped in that direction,
             // then flip all valid pieces
