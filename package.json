@@ -1,6 +1,6 @@
 {
   "name": "othello-danyo",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Othello utility with min/max and reinforcement learning algorithms",
   "keywords": [
     "othello"
