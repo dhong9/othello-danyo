@@ -88,7 +88,7 @@ class Othello_Danyo {
               }
               // It is an opponent piece, just keep scanning in our direction
         }
-          return false; // Either no consecutive opponent pieces or hit the edge
+        return false; // Either no consecutive opponent pieces or hit the edge
     }
 
     /**
@@ -151,10 +151,11 @@ class Othello_Danyo {
 
     /**
      * Plays a piece on the board
-     * @param {*} board the game board
-     * @param {*} r row
-     * @param {*} c column
-     * @param {*} piece player's piece
+     * @param {Array<Array<Number>>} board the game board
+     * @param {Number} r row
+     * @param {Number} c column
+     * @param {Number} piece player's piece
+     * @return resulting board after making a move
      */
     makeMove(board, r, c, piece) {
         // Put the piece at x, y
@@ -180,6 +181,8 @@ class Othello_Danyo {
             if (this.checkFlip(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent))
                 this.flipPieces(board, r + deltaRow, c + deltaCol, deltaRow, deltaCol, piece, opponent);
         }
+
+        return board;
     }
 
     /**
